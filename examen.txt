@@ -1,0 +1,371 @@
+Nouvelles classes : 
+
+	- Item1.java
+	- Item2.java
+	- Item5.java
+
+
+
+Fichiers modifiés : 
+
+	- Player.java : 
+
+Ajouts : 
+
+Nouvelles variables :   private Set<NPC> metNPCs; //Les PNJs rencontrés
+    			private NPC lastMetNPC;   //Dernier PNJ rencontré
+
+Méthodes : 
+
+    public Player(double x, double y) {
+        this.x = x;
+        this.y = y;
+        this.health = 200;
+        this.damage = 200;3
+        this.attackPower = 150;
+        this.inventory = new Inventory();
+        this.metNPCs = new HashSet<>();
+        sprite = new ImageView(new Image(getClass().getResource("/KnightBasic/Idle/UP/Knight_Idle.png").toExternalForm()));
+        sprite.setTranslateX(x);
+        sprite.setTranslateY(y);
+        sprite.setPreserveRatio(true);
+
+        // On ajoute les items 1,2 et 5 initialement dans l'inventaire du joueur
+        inventory.addItem(new Item1(0, 0, getClass().getResource("/Items/item1.png").toExternalForm()));
+        inventory.addItem(new Item2(0, 0, getClass().getResource("/Items/item2.png").toExternalForm()));
+        inventory.addItem(new Item5(0, 0, getClass().getResource("/Items/item5.png").toExternalForm()));
+    }
+
+    public void meetNPC(NPC npc) {
+        metNPCs.add(npc);
+        lastMetNPC = npc;
+    }
+
+    public boolean hasMetNPC() {
+        return !metNPCs.isEmpty();
+    }
+
+    public NPC getLastMetNPC() {
+        return lastMetNPC;
+    }
+
+
+
+
+	- Inventory.java : 
+
+Ajouts : 
+
+Nouvelles variables :
+
+Pour stocker les items : private List<Entity> items;
+Pour limiter le nombre d'items dans l'inventaire à 5 : private static final int MAX_ITEMS = 5;
+Pour limiter le nombre de potions dans l'inventaire à 5 : private static final int MAX_POTIONS = 5;
+
+Méthodes :
+
+    public boolean addItem(Entity item) {
+        if (items.size() >= MAX_ITEMS) {
+            showFullInventoryMessage();
+            return false;
+        }
+        items.add(item);
+        return true;
+    }
+
+    private void showFullInventoryMessage() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inventaire plein");
+            alert.setHeaderText(null);
+            alert.setContentText("L'inventaire est plein. Impossible d'ajouter l'item.");
+            alert.showAndWait();
+        });
+    }
+
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public void removeItem(Entity item) {
+        items.remove(item);
+    }
+
+    public void useItem(Class<? extends Entity> itemClass, Player player) {
+        for (Entity item : items) {
+            if (itemClass.isInstance(item)) {
+                if (item instanceof Item1) {
+                    ((Item1) item).use(player);
+                } else if (item instanceof Item2) {
+                    ((Item2) item).use(player);
+                }
+                break;
+            }
+        }
+    }
+
+
+
+
+
+	- Game.java :
+
+Ajouts :
+
+Nouvelle touches dans la méthode handleKeyPress(KeyCode code) : 
+
+    case Q:						//Pour utiliser l'item1
+        player.getInventory().useItem(Item1.class, player);
+        break;
+    case S:						//Pour utiliser l'item2
+        player.getInventory().useItem(Item2.class, player);
+        break;
+    case D:						//Pour utiliser l'item5
+        player.getInventory().useItem(Item5.class, player);
+        break;
+
+
+
+
+	- DungeonLevel.java :
+
+Ajouts : 
+
+Nouvelles variables : 
+
+    private List<Item2> items2; //Liste des item2 dans le jeu
+    private List<Item1> items1; //Liste des item1 dans le jeu
+    private List<Item5> items5; //Liste des item5 dans le jeu
+
+
+Création de l'item1 dans le premier niveau du donjon :
+Item1 item1 = new Item1(0, 0, getClass().getResource("/Items/item1.png").toExternalForm());
+player.getInventory().addItem(item1);
+
+
+Méthodes : 
+
+    // Ajouts des differents monstres, PNJs, potions et items 1, 2 et 5 dans le premier niveau du donjon
+    private void initLevel1() {
+        Monster monster1 = EntityFactory.createMonster(100, -150, getClass().getResource("/Goblin/Goblin_Left_Idle.png").toExternalForm(), Monster.MONSTER1, pane, this, pane);
+        Monster monster2 = EntityFactory.createMonster(-80, 0, getClass().getResource("/Arraignee/Arraignee_Idle.png").toExternalForm(), Monster.MONSTER2, pane, this, pane);
+
+        NPC npc1 = EntityFactory.createNPC(55, 125, getClass().getResource("/NPCs/NPC1_Left.png").toExternalForm(), pane);
+
+        Potion potion1 = EntityFactory.createPotion(0, 0, getClass().getResource("/Potions/potionHealth.png").toExternalForm(), "Health");
+        Potion potion2 = EntityFactory.createPotion(0, 0, getClass().getResource("/Potions/potionAttack.png").toExternalForm(), "Attack");
+
+        Item1 item1 = EntityFactory.createItem1(0, 0, getClass().getResource("/Items/item1.png").toExternalForm());
+        Item2 item2 = EntityFactory.createItem2(0, 0, getClass().getResource("/Items/item2.png").toExternalForm());
+        Item5 item5 = EntityFactory.createItem5(0, 0, getClass().getResource("/Items/item5.png").toExternalForm());
+
+        // Ajout des nouveaux PNJ avec des items dans leur inventaire
+        NPC npc2 = EntityFactory.createNPC(75, 100, getClass().getResource("/NPCs/NPC2_Left.png").toExternalForm(), pane);
+        NPC npc3 = EntityFactory.createNPC(120, 150, getClass().getResource("/NPCs/NPC2_Left.png").toExternalForm(), pane);
+
+        // Ajout des items aux inventaires des nouveaux PNJ
+        npc2.getInventory().addItem(EntityFactory.createItem1(0, 0, getClass().getResource("/Items/item1.png").toExternalForm()));
+        npc2.getInventory().addItem(EntityFactory.createItem2(0, 0, getClass().getResource("/Items/item2.png").toExternalForm()));
+        npc2.getInventory().addItem(EntityFactory.createItem5(0, 0, getClass().getResource("/Items/item5.png").toExternalForm()));
+
+
+        npc3.getInventory().addItem(EntityFactory.createItem1(0, 0, getClass().getResource("/Items/item1.png").toExternalForm()));
+        npc3.getInventory().addItem(EntityFactory.createItem2(0, 0, getClass().getResource("/Items/item2.png").toExternalForm()));
+        npc3.getInventory().addItem(EntityFactory.createItem5(0, 0, getClass().getResource("/Items/item5.png").toExternalForm()));
+
+
+        item5.setGame(game);
+        item5.setPane(pane);
+
+        player.getInventory().addItem(item1);
+        player.getInventory().addItem(item2);
+        player.getInventory().addItem(item5);
+
+        npc1.getInventory().addItem(potion1);
+        monster1.getInventory().addItem(potion2);
+
+        monsters.add(monster1);
+        monsters.add(monster2);
+        npcs.add(npc1);
+        npcs.add(npc2);
+        npcs.add(npc3);
+        items5.add(item5);
+        items2.add(item2);
+        items1.add(item1);
+
+        entities.addAll(monsters);
+        entities.addAll(npcs);
+        entities.addAll(items5);
+        entities.addAll(items2);
+        entities.addAll(items1);
+    }
+
+    public List<Item5> getItems5() {  //Retourne la liste des item5
+        return items5;
+    }
+
+    //Lorsque l'on appuie sur la touche espace, l'attaque du player s'enclenche et pour chaque monstre et PNJ en interaction avec le player lorsque l'on clique sur espace, des actions sont effectuées.
+    private void attack() {
+        for (Monster monster : getCurrentLevel().getMonsters()) {
+            if (player.getSprite().getBoundsInParent().intersects(monster.getSprite().getBoundsInParent())) {
+                monster.takeDamage(player.attack());
+                if (!monster.isDead()) {
+                    player.takeDamage(monster.attack());
+                }
+                if (monster.isDead()) {
+                    monster.die();
+                    getCurrentLevel().checkAndChangeKingImage();
+                }
+                if (player.isDead()) {
+                    player.die();
+                    delayDie();
+                    break;
+                }
+            }
+        }
+        for (NPC npc : getCurrentLevel().getNPCs()) {
+            if (player.getSprite().getBoundsInParent().intersects(npc.getSprite().getBoundsInParent())) {
+                player.meetNPC(npc); //On vérifie si le player a déjà été en intéraction avec le PNJ en question
+                if (!npc.hasBeenRobbed()) {	//Si le PNJ n'a pas été volé
+                    if (npc.getImageUrl().equals(getClass().getResource("/NPCs/NPC1_Left.png").toExternalForm()) || npc.getImageUrl().equals(getClass().getResource("/NPCs/NPC1_Right.png").toExternalForm())) {
+                        DialogUtil.showDialog(pane, "L'aventure est semée d'embûches. Il est important que je vous donne une potion de soins qui vous permet de récupérer 20 PV en cas de besoin. Bon courage !", () -> {
+                            Potion potion = EntityFactory.createPotion(0, 0, getClass().getResource("/Potions/potionHealth.png").toExternalForm(), "Health");
+                            player.getInventory().addPotion(potion);
+                        });
+                    }
+                    if (npc.getImageUrl().equals(getClass().getResource("/NPCs/NPC2_Left.png").toExternalForm()) || npc.getImageUrl().equals(getClass().getResource("/NPCs/NPC2_Right.png").toExternalForm())) {
+                        DialogUtil.showDialog(pane, "Si tu es arrivé jusqu'ici, jeune aventurier, c'est que tu as passé le premier niveau de ce donjon ! \n Prend ceci, c'est une potion d'attaque qui permet d'augmenter de 80 les dommages de tes attaques ! \n Je crois en toi, sauve notre roi !", () -> {
+                            Potion potion = EntityFactory.createPotion(0, 0, getClass().getResource("/Potions/potionAttack.png").toExternalForm(), "Attack");
+                            player.getInventory().addPotion(potion);
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+     private void showItemDialog(Entity item) {   //Affiche la possibilité d'utiliser ou non un item.
+        Stage itemStage = new Stage();
+        itemStage.initModality(Modality.WINDOW_MODAL);
+        itemStage.initOwner(pane.getScene().getWindow());
+        itemStage.initStyle(StageStyle.TRANSPARENT);
+
+        Label messageLabel = new Label("Voulez-vous utiliser ou stocker cet objet ?");
+        messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 20px; -fx-background-color: rgba(0, 0, 0, 0.8); -fx-background-radius: 10;");
+        messageLabel.setWrapText(true);
+        messageLabel.setMaxWidth(300);
+
+        Button useButton = new Button("Utiliser");
+        useButton.setStyle("-fx-font-size: 14px; -fx-padding: 10px 20px;");
+        useButton.setOnAction(e -> {
+            if (item instanceof Item1) {
+                ((Item1) item).use(player);
+            } else if (item instanceof Item2) {
+                ((Item2) item).use(player);
+            } else if (item instanceof Item5) {
+                ((Item5) item).use(player);
+            }
+            pane.getChildren().remove(item.getSprite());
+            itemStage.close();
+        });
+
+        Button stockButton = new Button("Stocker");
+        stockButton.setStyle("-fx-font-size: 14px; -fx-padding: 10px 20px;");
+        stockButton.setOnAction(e -> {
+            boolean added = player.getInventory().addItem(item);
+            if (added) {
+                pane.getChildren().remove(item.getSprite());
+            } else {
+                Label fullInventoryLabel = new Label("L'inventaire est plein.");
+                fullInventoryLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: red;");
+                VBox dialogBox = new VBox(messageLabel, fullInventoryLabel, useButton, stockButton);
+                dialogBox.setAlignment(Pos.CENTER);
+                dialogBox.setSpacing(10);
+                itemStage.getScene().setRoot(dialogBox);
+            }
+            itemStage.close();
+        });
+
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setStyle("-fx-padding: 20px; -fx-background-color: rgba(0, 0, 0, 0.8); -fx-background-radius: 10;");
+        vbox.setSpacing(10);
+        vbox.getChildren().addAll(messageLabel, useButton, stockButton);
+
+        Scene dialogScene = new Scene(vbox);
+        dialogScene.setFill(null);
+        itemStage.setScene(dialogScene);
+        itemStage.show();
+    }
+
+
+	- NPC.java : 
+
+Ajouts :
+
+Nouvelle variable pour savoir si le PNJ a été volé : private boolean hasBeenRobbed; 
+
+Méthodes : 
+
+    public boolean hasBeenRobbed() { //Verifie si le PNJ a été volé
+        return hasBeenRobbed;
+    }
+
+    public void setHasBeenRobbed(boolean hasBeenRobbed) {  //Si le parametre est true le PNJ a été volé 
+        this.hasBeenRobbed = hasBeenRobbed;
+    }
+
+
+	- Main.java :
+
+Méthode : 
+
+    private void showWelcomeDialog(Stage ownerStage) { //Message qui s'affiche dès le début de la partie afin d'expliquer comment jouer et le but du jeu.
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(ownerStage);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+
+        Label messageLabel = new Label("Bienvenue dans LevelOne ! " +
+                "\nVous devez battre tous les monstres et sauver le roi enlevé par ces derniers ! " +
+                "\nVoici quelques conseils pour que vous puissiez réussir votre mission au mieux : " +
+                "\n\n- Appuyez sur les touches fléchées pour vous déplacer. " +
+                "\n- Appuyez sur Espace pour attaquer. " +
+                "\n- Appuyez sur la touche e pour ouvrir votre inventaire. " +
+                "\n- Appuyez sur la touche q pour utiliser l'item1 et afficher l'inventaire du PNJ" +
+                "\n- Appuyez sur la touche s pour utiliser l'item2 et voler l'objet d'un PNJ" +
+                "\n\nBonne chance !");
+        messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 20px; -fx-background-color: rgba(0, 0, 0, 0.8); -fx-background-radius: 10;");
+
+        Button closeButton = new Button("OK");
+        closeButton.setStyle("-fx-font-size: 14px; -fx-padding: 10px 20px;");
+        closeButton.setOnAction(e -> dialogStage.close());
+
+        VBox vbox = new VBox(messageLabel, closeButton);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setStyle("-fx-padding: 20px; -fx-background-color: rgba(0, 0, 0, 0.8); -fx-background-radius: 10;");
+        vbox.setSpacing(10);
+
+        Scene dialogScene = new Scene(vbox);
+        dialogScene.setFill(null); // Rendre le fond transparent
+
+        dialogStage.setScene(dialogScene);
+        dialogStage.showAndWait();
+    }
+
+	- EntityFactory.java : 
+
+Méthodes : ces méthodes créent respectivement les entités Item1, Item2 et Item5
+
+    public static Item1 createItem1(double x, double y, String imagePath) {
+        return new Item1(x, y, imagePath);
+    }
+
+    public static Item2 createItem2(double x, double y, String imagePath) {
+        return new Item2(x, y, imagePath);
+    }
+
+    public static Item5 createItem5(double x, double y, String imagePath) {
+        return new Item5(x, y, imagePath);
+    }
+

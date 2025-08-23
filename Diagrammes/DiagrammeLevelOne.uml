@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/CYTech Student/IdeaProjects/Jeu3/src</OriginalElement>
+  <nodes>
+    <node x="90.47125965208639" y="2256.5919208155237">Main</node>
+    <node x="868.9831079301566" y="1692.975408864177">DungeonLevel</node>
+    <node x="-81.0375153935502" y="295.7591537222562">Potion</node>
+    <node x="261.4257624173933" y="1164.7193911102122">King</node>
+    <node x="450.62069681362505" y="1980.1177947866279">Game</node>
+    <node x="246.18768637017126" y="-13.866858877924784">Entity</node>
+    <node x="334.77706325528976" y="444.70414363416114">Inventory</node>
+    <node x="406.30559314310756" y="2402.3728823710926">Game.DialogUtil</node>
+    <node x="266.6722408712059" y="745.4170288148969">NPC</node>
+    <node x="685.0739474712664" y="378.6620729643934">Monster</node>
+    <node x="573.2191650884982" y="913.4216606203895">Player</node>
+    <node x="806.4447731836754" y="2274.120745029848">ImageManager</node>
+    <node x="31.109283678801347" y="1687.5675039510445">EntityFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="King" target="Entity" relationship="GENERALIZATION">
+      <point x="-114.4997624173933" y="-3.9111021214921493E-4" />
+      <point x="239.0" y="1208.719" />
+      <point x="239.0" y="361.16200000000003" />
+      <point x="364.688" y="361.16200000000003" />
+      <point x="3.136298287245154E-4" y="116.49985887792478" />
+    </edge>
+    <edge source="NPC" target="Inventory" relationship="CREATE">
+      <point x="-2.4087120584681543E-4" y="-80.50002881489684" />
+      <point x="381.172" y="701.0" />
+      <point x="454.277" y="701.0" />
+      <point x="-6.325528977413342E-5" y="104.99985636583881" />
+    </edge>
+    <edge source="Inventory" target="Potion" relationship="TO_MANY">
+      <point x="-119.50006325528977" y="-1.436341611338321E-4" />
+      <point x="223.0" y="549.704" />
+      <point x="223.0" y="475.759" />
+      <point x="143.4995153935502" y="14.999846277743814" />
+    </edge>
+    <edge source="DungeonLevel" target="King" relationship="TO_MANY">
+      <point x="-15.000107930156673" y="-201.0" />
+      <point x="1019.983" y="1659.922" />
+      <point x="390.9257624173933" y="1659.922" />
+      <point x="15.0" y="44.0" />
+    </edge>
+    <edge source="DungeonLevel" target="Player" relationship="TO_ONE">
+      <point x="-166.00010793015667" y="57.0245911358229" />
+      <point x="823.0" y="1951.0" />
+      <point x="823.0" y="2112.475" />
+      <point x="1218.483" y="2112.475" />
+      <point x="1218.483" y="1270.422" />
+      <point x="177.9998349115018" y="3.39379610522883E-4" />
+    </edge>
+    <edge source="Monster" target="Entity" relationship="GENERALIZATION">
+      <point x="-216.9999474712664" y="-188.4580729643934" />
+      <point x="239.0" y="427.204" />
+      <point x="239.0" y="361.16200000000003" />
+      <point x="364.688" y="361.16200000000003" />
+      <point x="3.136298287245154E-4" y="116.49985887792478" />
+    </edge>
+    <edge source="NPC" target="Entity" relationship="GENERALIZATION">
+      <point x="-114.50024087120588" y="-2.8814896836593107E-5" />
+      <point x="239.0" y="825.917" />
+      <point x="239.0" y="361.16200000000003" />
+      <point x="364.688" y="361.16200000000003" />
+      <point x="3.136298287245154E-4" y="116.49985887792478" />
+    </edge>
+    <edge source="Monster" target="DungeonLevel" relationship="TO_ONE">
+      <point x="-216.9999474712664" y="100.33792703560658" />
+      <point x="546.0" y="716.0" />
+      <point x="546.0" y="1893.975" />
+      <point x="-166.00010793015667" y="-4.088641771886614E-4" />
+    </edge>
+    <edge source="Game.DialogUtil" target="Game" relationship="INNER_CLASS">
+      <point x="-2.6848963294825126" y="-44.0" />
+      <point x="0.0" y="177.00000000000023" />
+    </edge>
+    <edge source="Potion" target="Entity" relationship="GENERALIZATION">
+      <point x="143.4995153935502" y="-1.5372225618648372E-4" />
+      <point x="239.0" y="460.759" />
+      <point x="239.0" y="361.16200000000003" />
+      <point x="364.688" y="361.16200000000003" />
+      <point x="3.136298287245154E-4" y="116.49985887792478" />
+    </edge>
+    <edge source="DungeonLevel" target="Monster" relationship="TO_MANY">
+      <point x="14.999892069843327" y="-201.0" />
+      <point x="147.90905252873358" y="237.00000000000006" />
+    </edge>
+    <edge source="Game" target="DungeonLevel" relationship="TO_ONE">
+      <point x="7.098303186374949" y="-176.99979478662794" />
+      <point x="580.719" y="1893.975" />
+      <point x="-166.00010793015667" y="-4.088641771886614E-4" />
+    </edge>
+    <edge source="DungeonLevel" target="Game" relationship="TO_ONE">
+      <point x="15.0" y="201.0" />
+      <point x="1049.9831079301566" y="2187.118" />
+      <point x="123.0" y="30.000205213372055" />
+    </edge>
+    <edge source="Main" target="Game" relationship="CREATE">
+      <point x="127.49999999999997" y="0.0" />
+      <point x="-123.0" y="167.47412602889585" />
+    </edge>
+    <edge source="Monster" target="Inventory" relationship="CREATE">
+      <point x="-216.9999474712664" y="-7.296439343917882E-5" />
+      <point x="591.277" y="615.662" />
+      <point x="591.277" y="701.0" />
+      <point x="454.277" y="701.0" />
+      <point x="-6.325528977413342E-5" y="104.99985636583881" />
+    </edge>
+    <edge source="EntityFactory" target="Monster" relationship="CREATE">
+      <point x="-242.0" y="0.0" />
+      <point x="-98.5375153935502" y="1767.5675039510445" />
+      <point x="-98.5375153935502" y="278.2591537222562" />
+      <point x="902.0739474712664" y="278.2591537222562" />
+      <point x="0.0" y="-237.0" />
+    </edge>
+    <edge source="NPC" target="Inventory" relationship="TO_ONE">
+      <point x="114.49975912879415" y="-2.8814896836593107E-5" />
+      <point x="518.5" y="825.917" />
+      <point x="64.22293674471024" y="104.99985636583881" />
+    </edge>
+    <edge source="Player" target="Inventory" relationship="CREATE">
+      <point x="-88.71916508849824" y="-356.9996606203895" />
+      <point x="662.5" y="701.0" />
+      <point x="454.277" y="701.0" />
+      <point x="-6.325528977413342E-5" y="104.99985636583881" />
+    </edge>
+    <edge source="DungeonLevel" target="NPC" relationship="TO_MANY">
+      <point x="-166.0" y="10.499591135822811" />
+      <point x="535.0" y="1904.475" />
+      <point x="535.0" y="894.5" />
+      <point x="114.5" y="68.58297118510313" />
+    </edge>
+    <edge source="EntityFactory" target="King" relationship="CREATE">
+      <point x="102.81647873859194" y="-80.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="EntityFactory" target="NPC" relationship="CREATE">
+      <point x="-74.64679907235154" y="-80.0" />
+      <point x="198.4624846064498" y="840.917" />
+      <point x="-114.5" y="14.999971185103163" />
+    </edge>
+    <edge source="Game" target="Player" relationship="CREATE">
+      <point x="22.09830318637495" y="-177.0" />
+      <point x="-155.50016508849825" y="357.0" />
+    </edge>
+    <edge source="Monster" target="Inventory" relationship="TO_ONE">
+      <point x="5.252873359040677E-5" y="236.99992703560662" />
+      <point x="902.074" y="884.0" />
+      <point x="518.5" y="884.0" />
+      <point x="64.22293674471024" y="104.99985636583881" />
+    </edge>
+    <edge source="Game" target="Player" relationship="TO_ONE">
+      <point x="123.00030318637494" y="2.0521337205536838E-4" />
+      <point x="823.0" y="2157.118" />
+      <point x="823.0" y="2112.475" />
+      <point x="1218.483" y="2112.475" />
+      <point x="1218.483" y="1270.422" />
+      <point x="177.9998349115018" y="3.39379610522883E-4" />
+    </edge>
+    <edge source="DungeonLevel" target="Entity" relationship="TO_MANY">
+      <point x="166.0" y="0.0" />
+      <point x="1233.483" y="1893.975408864177" />
+      <point x="1233.483" y="102.63314112207522" />
+      <point x="118.5" y="0.0" />
+    </edge>
+    <edge source="DungeonLevel" target="Potion" relationship="TO_MANY">
+      <point x="-1.0793015667331929E-4" y="-201.0004088641772" />
+      <point x="1034.983" y="1644.922" />
+      <point x="223.0" y="1644.922" />
+      <point x="223.0" y="475.759" />
+      <point x="143.4995153935502" y="14.999846277743814" />
+    </edge>
+    <edge source="Player" target="Inventory" relationship="TO_ONE">
+      <point x="-1.6508849819274474E-4" y="-356.9996606203895" />
+      <point x="751.219" y="884.0" />
+      <point x="518.5" y="884.0" />
+      <point x="64.22293674471024" y="104.99985636583881" />
+    </edge>
+    <edge source="Game" target="DungeonLevel" relationship="CREATE">
+      <point x="123.0" y="15.000205213372055" />
+      <point x="1034.9831079301566" y="2172.118" />
+      <point x="0.0" y="201.0" />
+    </edge>
+    <edge source="EntityFactory" target="Potion" relationship="CREATE">
+      <point x="-210.64679907235154" y="-80.0" />
+      <point x="0.0" y="165.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.21623762376237624" showDependencies="true" x="585.9999999999995" y="1238.5" />
+  <SelectedNodes>
+    <node>Inventory</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
