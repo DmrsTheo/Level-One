@@ -6,9 +6,13 @@ et naviguer à travers deux niveaux de donjons pour atteindre votre
 objectif. 
 # 1. Contrôles 
 Flèche Haut : Déplacer vers le haut 
+
 Flèche Bas : Déplacer vers le bas 
+
 Flèche Gauche : Déplacer vers la gauche 
+
 Flèche Droite : Déplacer vers la droite 
+
 Espace : Attaquer 
 E : Ouvrir l'inventaire 
 # 2. Mécaniques du jeu 
@@ -36,14 +40,16 @@ les potions que vous avez collectées et les utiliser pour récupérer de la
 santé ou augmenter votre attaque. 
 # 4. Fin du jeu et redémarrage 
 Si votre santé tombe à zéro, le jeu est terminé. Vous verrez un écran 
-'Game Over' avec une option pour redémarrer le jeu. Cliquez sur 
-'Rejouer' pour recommencer le jeu depuis le début. 
+'Game Over' avec une option pour redémarrer le jeu. 
+Cliquez sur 'Rejouer' pour recommencer le jeu depuis le début. 
 # 5. Compilation et exécution 
 Pour compiler le programme, cette commande est nécessaire : 
+
 Javac --module-path chemin\openJFX\javafx-sdk-22\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics 
 *.java 
 
 Pour exécuter le programme, cette commande est nécessaire : 
+
 java --module-path chemin\openJFX\javafx-sdk-22\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
 # 6. Conclusion 
 Utilisez vos compétences et vos ressources à bon escient pour vaincre 
