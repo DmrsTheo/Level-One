@@ -15,6 +15,7 @@ E : Ouvrir l'inventaire
 A) La Santé : La barre de santé du joueur est représentée en vert. La 
 santé maximale du joueur est de 200. Vous pouvez récupérer de la 
 santé en utilisant des potions de santé. 
+
 B) L'Attaque : La barre d'attaque du joueur est représentée en rouge. 
 La puissance d'attaque maximale du joueur est de 300. Utilisez des 
 potions d'attaque pour augmenter votre puissance d'attaque.  
