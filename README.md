@@ -18,12 +18,15 @@ santé en utilisant des potions de santé.
 B) L'Attaque : La barre d'attaque du joueur est représentée en rouge. 
 La puissance d'attaque maximale du joueur est de 300. Utilisez des 
 potions d'attaque pour augmenter votre puissance d'attaque.  
+
 C) Potions : Collectez des potions pour améliorer votre santé ou votre 
 attaque. Vous pouvez stocker ou utiliser les potions en les ramassant 
-ou en les récupérant dans votre inventaire. 
+ou en les récupérant dans votre inventaire.
+
 D) Ennemis : Combattez divers types de monstres avec différentes 
 quantités de santé et de dommages. Les monstres laissent tomber des 
 potions lorsqu'ils meurent. 
+
 E) Objectif : Battez tous les monstres et sauvez le roi pour gagner le 
 jeu. 
 # 3. Inventaire 
@@ -38,6 +41,7 @@ Si votre santé tombe à zéro, le jeu est terminé. Vous verrez un écran
 Pour compiler le programme, cette commande est nécessaire : 
 Javac --module-path chemin\openJFX\javafx-sdk-22\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics 
 *.java 
+
 Pour exécuter le programme, cette commande est nécessaire : 
 java --module-path chemin\openJFX\javafx-sdk-22\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics Main 
 # 6. Conclusion 
